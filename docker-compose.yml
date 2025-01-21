@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:15
+    container_name: java_test_db
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - 5433:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  java_test:
+    image: java_test_app
+    build:
+      context: .
+    container_name: java_test_app
+    env_file:
+      - .env
+    depends_on:
+      - db
+    
+    # Если не работает эта команда, используйте закомментированную
+    command: ["/java_test/docker/app.sh"]
+    # command: sh -c "alembic upgrade head && gunicorn app.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000"
+    ports:
+      - 7777:8000
+
+volumes:
+  postgres_data: 
