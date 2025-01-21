@@ -6,11 +6,12 @@
 ## Установка
 1. Клонируйте репозиторий:
     ```sh
-    git clone https://github.com/yourusername/my-python-app.git
+    git clone https://github.com/Alabaii/javacode_test.git
     ```
 2. Перейдите в директорию проекта:
     ```sh
-    cd my-python-app
+    cd javacode_test
+
     ```
 3. Создайте и активируйте виртуальное окружение:
     ```sh
