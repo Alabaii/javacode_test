@@ -29,7 +29,7 @@ class BaseDAO:
             )
 
         async with async_session_maker() as session:
-            result = await session.execute(select(cls.model).where(cls.model.id == uuid_obj))
+            result = await session.execute(select(cls.model).where(cls.model.id == uuid_obj)).with_for_update()
             entity = result.scalar_one_or_none()
             
             if entity is None:
